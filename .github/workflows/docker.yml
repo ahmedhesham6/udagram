@@ -13,13 +13,13 @@ jobs:
       matrix:
         include:
           - context: ./udagram-reverseproxy
-          tags: ahmedhesham6/udagram-reverseproxy:latest
+            tags: ahmedhesham6/udagram-reverseproxy:latest
           - context: ./udagram-api-user
-          tags: ahmedhesham6/udagram-api-user:latest
+            tags: ahmedhesham6/udagram-api-user:latest
           - context: ./udagram-api-feed
-          tags: ahmedhesham6/udagram-api-feed:latest
+            tags: ahmedhesham6/udagram-api-feed:latest
           - context: ./udagram-frontend
-          tags: ahmedhesham6/udagram-frontend:latest
+            tags: ahmedhesham6/udagram-frontend:latest
     steps:
       -
         name: Set up QEMU
