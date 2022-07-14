@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-feed
+  name: backend-feed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-feed
+  template:
+    metadata:
+      labels:
+        app: backend-feed
+    spec:
+      containers:
+      - image: ahmedhesham6/udagram-api-feed:v1.0.0
+        name: backend-feed
+        imagePullPolicy: Always  
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "2048Mi"
+            cpu: "500m"          
+        env:
+        - name: URL
+          valueFrom:
+            configMapKeyRef:
+              name: udagram-env-configmap 
+              key: url
+        - name: AWS_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: udagram-env-configmap 
+              key: bucket_arn
+        - name: AWS_PROFILE
+          valueFrom:
+            configMapKeyRef:
+              name: udagram-env-configmap 
+              key: aws_profile
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: udagram-env-configmap 
+              key: bucket_region
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: udagram-env-configmap 
+              key: database_name
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: udagram-env-configmap 
+              key: database_host
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: udagram-env-secret
+              key: jwt_secret
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: udagram-env-secret
+              key: database_password
+        - name: POSTGRES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: udagram-env-secret
+              key: database_username      
+        volumeMounts:
+        - name: aws-secret
+          mountPath: "/root/.aws/"
+          readOnly: true        
+      restartPolicy: Always
+      volumes:
+      - name: aws-secret
+        secret:
+          secretName: aws-secret  
