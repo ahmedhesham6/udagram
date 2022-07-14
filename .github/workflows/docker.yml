@@ -13,13 +13,13 @@ jobs:
       matrix:
         include:
           - context: udagram-reverseproxy
-            tags: ahmedhesham6/udagram-reverseproxy:latest
+            tags: ahmedhesham6/udagram-reverseproxy:v1.0.0
           - context: udagram-api-user
-            tags: ahmedhesham6/udagram-api-user:latest
+            tags: ahmedhesham6/udagram-api-user:v1.0.0
           - context: udagram-api-feed
-            tags: ahmedhesham6/udagram-api-feed:latest
+            tags: ahmedhesham6/udagram-api-feed:v1.0.0
           - context: udagram-frontend
-            tags: ahmedhesham6/udagram-frontend:latest
+            tags: ahmedhesham6/udagram-frontend:v1.0.0
     steps:
       - uses: actions/checkout@v2
       -
