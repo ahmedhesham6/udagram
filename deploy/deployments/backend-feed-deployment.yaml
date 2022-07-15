@@ -23,8 +23,8 @@ spec:
             memory: "64Mi"
             cpu: "250m"
           limits:
-            memory: "2048Mi"
-            cpu: "500m"          
+            memory: "4Gi"
+            cpu: "500m"         
         env:
         - name: URL
           valueFrom:
